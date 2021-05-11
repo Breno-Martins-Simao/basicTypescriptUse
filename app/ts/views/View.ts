@@ -1,4 +1,4 @@
-abstract class View<VariantType>{
+export abstract class View<VariantType>{
     protected _elemento : JQuery
 
     constructor (selector : string){
