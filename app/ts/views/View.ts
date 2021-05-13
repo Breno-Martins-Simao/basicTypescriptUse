@@ -1,3 +1,4 @@
+import { logExecutionTime } from '../helpers/decorators/index'
 export abstract class View<VariantType>{
     protected _elemento : JQuery
     private _escapar : boolean
@@ -7,11 +8,14 @@ export abstract class View<VariantType>{
         this._escapar = escapar
     }
 
+    @logExecutionTime()
     update(model : VariantType):void{
+        
         let template = this.template(model)
         if(this._escapar)
             template = template.replace(/<script>[\s\S]*?<\/script>/, '');
         this._elemento.html(template)
+        
     }
 
     abstract template(model: VariantType):string

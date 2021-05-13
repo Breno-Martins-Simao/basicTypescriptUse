@@ -1,6 +1,6 @@
 import { Negociacoes, Negociacao } from '../models/index'
 import { MensagemView, NegociacoesView } from '../views/index'
-
+import { domInject } from '../helpers/decorators/index'
 enum DiaDaSemana{
     Domingo,
     Segunda,
@@ -12,24 +12,29 @@ enum DiaDaSemana{
 }
 
 export class NegociacaoController{
+    @domInject('#data')
     private _inputData : JQuery
+    
+    @domInject('#quantidade')
     private _inputValor : JQuery
+    
+    @domInject('#valor')
     private _inputQuantidade : JQuery
+    
     private _negociacoesModel : Negociacoes
     private _NegociacoesView : NegociacoesView
     private _mensagemView : MensagemView
 
     constructor(){  
-        this._inputData = $('#data')
-        this._inputValor = $('#quantidade')
-        this._inputQuantidade = $('#valor')
         this._negociacoesModel = new Negociacoes()
         this._NegociacoesView = new NegociacoesView("#negociacoesView")
         this._NegociacoesView.update(this._negociacoesModel)
         this._mensagemView = new MensagemView("#mensagemView")
     }
 
+    
     adiciona(event:Event){
+        
         event.preventDefault()   
         
         let data = new Date (this._inputData.val().replace(/-/g , ','))
