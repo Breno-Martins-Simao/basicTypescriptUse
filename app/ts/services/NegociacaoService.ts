@@ -7,7 +7,10 @@ export class NegociacaoService {
             .then(res => res.json())
             .then((dados: iNegociacaoParcial[]) => 
                 dados.map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
-            ).catch((err) => console.log(err.message));       
+            ).catch((err) => {
+                console.log(err.message)
+                throw new Error('Não foi possível imporar as negociações')
+            });       
     }
 }
 
